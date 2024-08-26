@@ -1,0 +1,60 @@
+<div class="container mt-4" [formGroup]="companyForm">
+
+    <!-- Modal Dialog for Adding Department -->
+    <p-dialog header="Add Companys" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '400px'}" >
+        <form (ngSubmit)="addCompany()" [formGroup]="companyForm">
+            <div class="p-field">
+                <label for="name">Company</label>
+                <input id="companyName" type="text" pInputText formControlName="companyName" placeholder="Name">
+            </div>
+              
+          <div class="flex justify-content-center gap-2">
+            <p-button label="Add" type="submit" class="p-button-primary"></p-button>
+            <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+        </div>
+        </form>
+    </p-dialog>
+  
+    <!-- Location Table -->
+    <!-- <h2 class="text-center mt-5 mb-3">Locations</h2> -->
+    <div class="p-grid">
+      <div class="col-12">
+          <div class="card">
+            <p-table [value]="companys" styleClass="p-datatable-gridlines">
+                <ng-template pTemplate="caption">
+                    <div class="flex">
+                        <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+                        </div>
+                        </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Company ID</th>
+                        <th>Companny Name</th>
+                        <th>Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-company>
+                    <tr>
+                        <td>{{ company.id }}</td>
+                        <td>{{ company.name }}</td>
+                        <td>
+                            <div class="flex justify-content-center gap-2">
+                                <button pButton icon="pi pi-pencil" [routerLink]="'/updatecompany/' + company.id" class="p-button-success"></button>
+                                <p-toast />
+                                <p-confirmPopup>
+                                    <ng-template pTemplate="content" let-message>
+                                        <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                            <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                                            <p>{{ message.message }}</p>
+                                        </div>
+                                    </ng-template>
+                                </p-confirmPopup>
+                                <p-button (click)="confirm($event,company.id)" icon="pi pi-trash"></p-button></div>
+                            </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+  </div>
+  

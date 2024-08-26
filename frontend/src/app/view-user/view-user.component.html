@@ -1,0 +1,253 @@
+<div class="grid">
+  <!-- Summary Cards -->
+  <div class="col-12 md:col-6 lg:col-6 xl:col-4">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Total Employees</span>
+          <div class="text-900 font-medium text-xl">{{ totalUsers }}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-blue-100 border-round" [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+          <i class="pi pi-users text-blue-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 md:col-6 lg:col-6 xl:col-4">
+    <div class="card mb-1">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Male Employees</span>
+          <div class="text-900 font-medium text-xl">{{ maleUsers }}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-orange-100 border-round" [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+          <i class="pi pi-mars text-orange-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 md:col-6 lg:col-6 xl:col-4">
+    <div class="card mb-0">
+      <div class="flex justify-content-between mb-3">
+        <div>
+          <span class="block text-500 font-medium mb-3">Female Employees</span>
+          <div class="text-900 font-medium text-xl">{{ femaleUsers }}</div>
+        </div>
+        <div class="flex align-items-center justify-content-center bg-cyan-100 border-round" [ngStyle]="{ width: '2.5rem', height: '2.5rem' }">
+          <i class="pi pi-venus text-cyan-500 text-xl"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Data Table -->
+<div class="card">
+  <p-table [value]="users" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+    <ng-template pTemplate="caption">
+      <div class="flex justify-content-between flex-column sm:flex-row">
+        <div class="flex align-items-center mb-2 sm:mb-0">
+          <p-button label="Add" routerLink="/adduser" icon="pi pi-plus"></p-button>
+          <button pButton label="Clear" class="p-button-outlined ml-2" icon="pi pi-filter-slash" (click)="clearFilters()"></button>
+        </div>
+        <span class="p-input-icon-left md-2">
+          <i class="pi pi-search"></i>
+          <input pInputText type="text" #filter [(ngModel)]="searchQuery" (input)="onSearch('name', filter.value)" placeholder="Search by Keyword" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th>
+          <div class="flex justify-content-between align-items-center">
+            ID
+            <p-columnFilter type="text" field="id" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #idFilter (input)="onSearch('id', idFilter.value)" placeholder="ID">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width:10rem">
+          <div class="flex justify-content-between align-items-center">
+            Employee ID
+            <p-columnFilter type="text" field="employee_id" display="menu" matchMode="contains">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" [(ngModel)]="filterValues.employee_id" #employee_idFilter (input)="onSearch('employee_id', filterValues.employee_id)" placeholder="Search by employee_id" />
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width:10rem">
+          <div class="flex justify-content-between align-items-center">
+            Name
+            <p-columnFilter type="text" field="name" display="menu" matchMode="contains">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" [(ngModel)]="filterValues.name" #nameFilter (input)="onSearch('name', filterValues.name)" placeholder="Search by name" />
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 12rem">
+          <div class="flex justify-content-between align-items-center">
+            Email
+            <p-columnFilter type="text" field="email" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #emailFilter (input)="onSearch('email', emailFilter.value)"  placeholder="Email">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 12rem">
+          <div class="flex justify-content-between align-items-center">
+            Mobile No
+            <p-columnFilter type="text" field="contact_number" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #mobile_noFilter (input)="onSearch('contact_number', mobile_noFilter.value)" placeholder="Mobile No">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Gender
+            <p-columnFilter type="dropdown" field="gender" display="menu">
+              <ng-template pTemplate="filter">
+                <p-dropdown 
+                  [options]="genderOptions" 
+                  [(ngModel)]="filterValues.gender" 
+                  (ngModelChange)="onSearch('gender', filterValues.gender)" 
+                  placeholder="Select Gender">
+                </p-dropdown>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Department
+            <p-columnFilter type="dropdown" field="department" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText list="departments" (input)="onDepartmentInput($event)" [(ngModel)]="filterValues.departmentName" placeholder="Select Department">
+                <datalist id="departments">
+                  <option *ngFor="let department of departments" [value]="department.name"></option>
+                </datalist>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Location
+            <p-columnFilter type="dropdown" field="location" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText list="locations" (input)="onLocationInput($event)" [(ngModel)]="filterValues.locationName" placeholder="Select Location">
+                <datalist id="locations">
+                  <option *ngFor="let location of locations" [value]="location.name"></option>
+                </datalist>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Device Enrol Number
+            <p-columnFilter type="text" field="device_enrol_number" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #deviceEnrolFilter (input)="onSearch('device_enrol_number', deviceEnrolFilter.value)" placeholder="Device Enrol Number">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Card Number
+            <p-columnFilter type="text" field="card_number" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #cardNumberFilter (input)="onSearch('card_number', cardNumberFilter.value)" placeholder="Card Number">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Company
+            <p-columnFilter type="text" field="company" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #companyFilter (input)="onSearch('company', companyFilter.value)" placeholder="Company">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Employee Type
+            <p-columnFilter type="text" field="employee_type" display="menu">
+              <ng-template pTemplate="filter">
+                <input pInputText type="text" #employeeTypeFilter (input)="onSearch('employee_type', employeeTypeFilter.value)" placeholder="Employee Type">
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Date of Joining
+            <p-columnFilter type="date" field="date_of_joining" display="menu">
+              <ng-template pTemplate="filter">
+                <p-calendar [(ngModel)]="filterValues.date_of_joining" (ngModelChange)="onSearch('date_of_joining', filterValues.date_of_joining)" dateFormat="yy-mm-dd"></p-calendar>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th style="min-width: 4rem">
+          <div class="flex justify-content-between align-items-center">
+            Date of Leaving
+            <p-columnFilter type="date" field="date_of_leaving" display="menu">
+              <ng-template pTemplate="filter">
+                <p-calendar [(ngModel)]="filterValues.date_of_leaving" (ngModelChange)="onSearch('date_of_leaving', filterValues.date_of_leaving)" dateFormat="yy-mm-dd"></p-calendar>
+              </ng-template>
+            </p-columnFilter>
+          </div>
+        </th>
+        <th>
+          <div class="flex justify-content-between align-items-center">
+            Action
+          </div>
+        </th>    
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.employee_id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email_id }}</td>
+        <td>{{ user.contact_number }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.departmentName }}</td>
+        <td>{{ user.locationName }}</td>
+        <td>{{ user.device_enrol_number }}</td>
+        <td>{{ user.card_number }}</td>
+        <td>{{ user.companyName }}</td>
+        <td>{{ user.employeeTypeName }}</td>
+        <td>{{ user.date_of_joining | date:'yyyy-MM-dd' }}</td>
+        <td>{{ user.date_of_leaving | date:'yyyy-MM-dd' }}</td>
+        <td>
+          <div class="flex justify-content-center gap-2">
+            <button pButton icon="pi pi-pencil" [routerLink]="'/updateuser/' + user.id" class="p-button-success"></button>
+            <p-toast></p-toast>
+            <p-confirmPopup>
+              <ng-template pTemplate="content" let-message>
+                <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                  <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                  <p>{{ message.message }}</p>
+                </div>
+              </ng-template>
+            </p-confirmPopup>
+            <p-button (click)="confirm($event, user.id)" icon="pi pi-trash"></p-button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

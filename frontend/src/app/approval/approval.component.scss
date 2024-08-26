@@ -1,0 +1,110 @@
+// Variables for easy customization
+$frame-size: 130px;
+$frame-border-radius: 10px; // Adjust as needed
+$border-color: #ccc;
+$border-width: 1px;
+$outer-border-color: #007BFF; // Color for the outer border
+$outer-border-width: 1px;
+
+.field {
+    .webcam-section-wrapper {
+        border: $outer-border-width solid $outer-border-color;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .webcam-section {
+      display: flex;
+      justify-content: space-evenly;
+
+        .webcam-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            label {
+                margin-bottom: 10px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .webcam-frame {
+              position: relative;
+              width: $frame-size;
+              height: $frame-size;
+              border-radius: 100%;
+              overflow: hidden;
+              border: $border-width solid $border-color;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-bottom: 10px;
+
+              webcam, .captured-image {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                 // Ensure the webcam feed and captured image are circular
+              }
+          }
+
+           
+        }
+    }
+
+  
+}
+
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .visitor-info {
+    flex: 1;
+  }
+  
+  .webcam-section {
+    flex: 0 0 auto;
+    margin-left: 20px;
+  }
+  
+  .webcam-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .webcam-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .webcam-frame {
+    width: 190px;
+    height: 260px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .captured-image {
+    width: 100%;
+    height: auto;
+  }
+  
+  .unverified-warning {
+    color: red;
+    font-weight: bold;
+  }
+  

@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; // Full viewport height for vertical centering
+}
+
+form {
+  width: 100%; // Take full width of its container
+  max-width: 800px; // Maximum width of the form
+  margin: 0 auto; // Center horizontally
+  padding: 20px; // Add some padding
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Optional: Add some shadow for better visualization
+  background-color: #fff; // Optional: Background color
+  border-radius: 8px; // Optional: Rounded corners
+}
+
+.field {
+  margin-bottom: 1.5rem; // Space between fields
+}
+
+.p-button {
+  display: block;
+  margin: 0 auto;
+}
+
+
+h3 {
+  text-align: center; // Center-align the heading
+  margin-bottom: 20px; // Space below the heading
+}

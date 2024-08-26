@@ -1,0 +1,41 @@
+<div class="container mt-4" [formGroup]="updateCanteenFoodMenuForm">
+    <!-- Form for Updating Canteen Food Menu -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Update Canteen Food Menu</h3>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="updateCanteenFoodMenu()" [formGroup]="updateCanteenFoodMenuForm">
+          <div class="p-field">
+            <label for="name">Name</label>
+            <input id="name" pInputText formControlName="name" placeholder="Name" />
+          </div>
+          <div class="p-field">
+            <label for="menu">Menu</label>
+            <input id="menu" pInputText formControlName="menu" placeholder="Menu" />
+          </div>
+          <div class="p-field">
+            <label for="quantity">Quantity</label>
+            <input id="quantity" pInputText formControlName="quantity" placeholder="Quantity" />
+          </div>
+          <div class="p-field">
+            <label for="calorie">Calorie</label>
+            <input id="calorie" pInputText formControlName="calorie" placeholder="Calorie" />
+          </div>
+          <div class="p-field">
+            <label for="item_photo">Food Photo</label>
+            <input type="file" (change)="onFileSelected($event)" />
+          </div>
+          <div *ngIf="currentFoodMenu?.item_photo" class="p-field">
+            <label>Current Photo</label>
+            <img [src]="currentFoodMenu?.item_photo" alt="Food Photo" class="img-fluid" style="max-width: 200px; max-height: 200px;">
+          </div>
+          <div class="flex justify-content-center gap-2">
+            <p-button label="Update" type="submit" class="p-button-primary" [disabled]="!updateCanteenFoodMenuForm.valid"></p-button>
+            <p-button label="Cancel" class="p-button-secondary" routerLink="/canteenfoodmenu"></p-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,413 @@
+<div class="records-container">
+  <div class="card form-section">
+    <p-calendar [(ngModel)]="startDate" placeholder="Select Start Date" dateFormat="yy-mm-dd"></p-calendar>
+    <p-calendar [(ngModel)]="endDate" placeholder="Select End Date" dateFormat="yy-mm-dd"></p-calendar>
+    <button pButton type="button" label="Export Visitors" (click)="exportVisitors()"></button>
+  </div>
+<br><br>
+  <div class="card">
+    <p-table [value]="visitors" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[10, 20, 50]" styleClass="p-datatable-gridlines" responsiveLayout="scroll">
+      <ng-template pTemplate="caption">
+        <div class="flex justify-content-between flex-column sm:flex-row">
+          <div class="flex align-items-center">
+            <button pButton label="Clear" class="p-button-outlined ml-2" icon="pi pi-filter-slash" (click)="clearFilters()"></button>
+          </div>
+          <span class="p-input-icon-left md-2">
+            <i class="pi pi-search"></i>
+            <input pInputText type="text" #filter [(ngModel)]="searchQuery" (input)="onSearch()" placeholder="Search by Keyword" />
+          </span>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>
+            <div class="flex justify-content-between align-items-center">
+              Visitor Pass No
+              <p-columnFilter type="text" field="visitor_pass_no" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #passNoFilter (input)="onSearch()" placeholder="Visitor Pass No">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Visitor Name
+              <p-columnFilter type="text" field="visitor_name" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #nameFilter (input)="onSearch()" placeholder=" Visitor Name">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Visitor Photo
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              ID Proof Photo
+            </div>
+          </th>          
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Mobile No
+              <p-columnFilter type="text" field="mobile_no" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #mobileNoFilter (input)="onSearch()" placeholder="Mobile No">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Email
+              <p-columnFilter type="text" field="email" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #emailFilter (input)="onSearch()" placeholder="Email">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Designation
+              <p-columnFilter type="text" field="designation" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #designationFilter (input)="onSearch()" placeholder="Designation">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Department
+              <p-columnFilter type="dropdown" field="department" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText list="departments" (input)="onDepartmentInput($event)" [(ngModel)]="filterValues.department" placeholder="Select Department">
+                  <datalist id="departments">
+                    <option *ngFor="let department of departments" [value]="department.name"></option>
+                  </datalist>
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Nationality
+              <p-columnFilter type="text" field="nationality" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #nationalityFilter (input)="onSearch()" placeholder="Nationality">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Total Visitors
+              <p-columnFilter type="text" field="total_visitor" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #totalVisitorFilter (input)="onSearch()" placeholder="Total Visitors">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Company Name
+              <p-columnFilter type="text" field="company_name" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #companyNameFilter (input)="onSearch()" placeholder="Company Name">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Company Contact No
+              <p-columnFilter type="text" field="company_contact_no" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #companyContactNoFilter (input)="onSearch()" placeholder="Company Contact No">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Company Address
+              <p-columnFilter type="text" field="company_address" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #companyAddressFilter (input)="onSearch()" placeholder="Company Address">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Area to Visit
+              <p-columnFilter type="text" field="area_to_visit" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #areaToVisitFilter (input)="onSearch()" placeholder="Area to Visit">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Type of Visitor
+              <p-columnFilter type="text" field="type_of_visitor" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #typeOfVisitorFilter (input)="onSearch()" placeholder="Type of Visitor">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Meeting Purpose
+              <p-columnFilter type="text" field="meeting_purpose" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #meetingPurposeFilter (input)="onSearch()" placeholder="Meeting Purpose">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              ID Proof
+              <p-columnFilter type="text" field="id_proof" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #idProofFilter (input)="onSearch()" placeholder="ID Proof">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              ID Proof Number
+              <p-columnFilter type="text" field="id_proof_number" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #idProofNumberFilter (input)="onSearch()" placeholder="ID Proof Number">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Valid Pass From
+              <p-columnFilter type="date" field="valid_pass_from" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="date" (input)="applyFilter()" [(ngModel)]="filterValues.valid_pass_from" placeholder="Valid Pass From">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Valid Pass To
+              <p-columnFilter type="date" field="valid_pass_to" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="date" (input)="applyFilter()" [(ngModel)]="filterValues.valid_pass_to" placeholder="Valid Pass To">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Visitor Status
+              <p-columnFilter type="text" field="visitor_status" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #visitorStatusFilter (input)="onSearch()" placeholder="Visitor Status">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Expecting Stay Hours
+              <p-columnFilter type="text" field="expecting_stay_hours" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #expectingStayHoursFilter (input)="onSearch()" placeholder="Expecting Stay Hours">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Select Employee
+              <p-columnFilter type="text" field="select_employee" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #selectEmployeeFilter (input)="onSearch()" placeholder="Select Employee">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Host Department
+              <p-columnFilter type="text" field="host_department" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #hostDepartmentFilter (input)="onSearch()" placeholder="Host Department">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Host Email ID
+              <p-columnFilter type="text" field="host_email_id" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #hostEmailIdFilter (input)="onSearch()" placeholder="Host Email ID">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Host Contact Details
+              <p-columnFilter type="text" field="host_contact_details" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #hostContactDetailsFilter (input)="onSearch()" placeholder="Host Contact Details">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Item Caring
+              <p-columnFilter type="text" field="item_caring" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #itemCaringFilter (input)="onSearch()" placeholder="Item Caring">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Make Serial No
+              <p-columnFilter type="text" field="make_serial_no" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #makeSerialNoFilter (input)="onSearch()" placeholder="Make Serial No">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Vehicle Number
+              <p-columnFilter type="text" field="vehicle_number" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #vehicleNumberFilter (input)="onSearch()" placeholder="Vehicle Number">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Vehicle Type
+              <p-columnFilter type="text" field="vehicle_type" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #vehicleTypeFilter (input)="onSearch()" placeholder="Vehicle Type">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Check-In Time
+              <p-columnFilter type="date" field="check_in_time" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="date" (input)="applyFilter()" [(ngModel)]="filterValues.check_in_time" placeholder="Check-In Time">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Check-Out Time
+              <p-columnFilter type="date" field="check_out_time" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="date" (input)="applyFilter()" [(ngModel)]="filterValues.check_out_time" placeholder="Check-Out Time">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Total Stay Hours
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Verified
+              <p-columnFilter type="text" field="is_verified" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #isVerifiedFilter (input)="onSearch()" placeholder="Verified">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+          <th style="min-width:12rem">
+            <div class="flex justify-content-between align-items-center">
+              Approved
+              <p-columnFilter type="text" field="is_approved" display="menu">
+                <ng-template pTemplate="filter">
+                  <input pInputText type="text" #isApprovedFilter (input)="onSearch()" placeholder="Approved">
+                </ng-template>
+              </p-columnFilter>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+  
+      <ng-template pTemplate="body" let-visitor>
+        <tr>
+          <td class="fit-cell">{{ visitor.visitor_pass_no || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.visitor_name || 'No Data' }}</td>
+          <td class="fit-cell">
+            <img *ngIf="visitor.visitor_photo; else noPhoto" [src]="visitor.visitor_photo" alt="Visitor Photo" class="visitor-photo">
+            <ng-template #noPhoto><span>No Visitor Photo</span></ng-template>
+          </td>
+          <td class="fit-cell">
+            <img *ngIf="visitor.id_proof_photo; else noIdProofPhoto" [src]="visitor.id_proof_photo" alt="ID Proof Photo" class="id-proof-photo">
+            <ng-template #noIdProofPhoto><span>No ID Proof Photo</span></ng-template>
+          </td>          
+          <td class="fit-cell">{{ visitor.mobile_no || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.email || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.designation || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.department || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.nationality || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.total_visitor || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.company_name || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.company_contact_no || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.company_address || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.area_to_visit || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.type_of_visitor || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.meeting_purpose || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.id_proof || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.id_proof_number || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.valid_pass_from ? (visitor.valid_pass_from | date:'short') : 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.valid_pass_to ? (visitor.valid_pass_to | date:'short') : 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.visitor_status || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.expecting_stay_hours || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.select_employee || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.host_department || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.host_email_id || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.host_contact_details || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.item_caring || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.make_serial_no || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.vehicle_number || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.vehicle_type || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.check_in_time ? (visitor.check_in_time | date:'short') : 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.check_out_time ? (visitor.check_out_time | date:'short') : 'No Data' }}</td>
+          <td class="fit-cell">{{ calculateStayHours(visitor.check_in_time, visitor.check_out_time) || 'No Data' }}</td>
+          <td class="fit-cell">{{ visitor.is_verified ? 'Yes' : 'No' }}</td>
+          <td class="fit-cell">{{ visitor.is_approved ? 'Yes' : 'No' }}</td>
+        </tr>
+        
+      </ng-template>
+    </p-table>
+  </div>
+  
+</div>

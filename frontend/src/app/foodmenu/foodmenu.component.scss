@@ -1,0 +1,201 @@
+/* Base styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+}
+
+.fit {
+  min-height: 100vh; // Ensure the container takes up at least the full viewport height
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+
+  .logo {
+    max-width: 80px;
+    margin-bottom: 20px;
+  }
+  .menu-details {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    h4 {
+      margin: 0;
+    }
+  }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  margin: 10px; // Added margin for better spacing
+  box-sizing: border-box;
+
+  h3 {
+    margin-top: 0;
+  }
+}
+
+.carousel-container {
+  width: 100%;
+}
+
+.carousel-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .item-photo {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+
+  .item-info {
+    font-size: 16px;
+  }
+}
+
+.video-container {
+  video {
+    width: 100%;
+    border-radius: 8px;
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+  .header {
+    .logo {
+      max-width: 80px;
+    }
+  }
+
+  .carousel-item {
+    flex-direction: column;
+  }
+
+  .item-info {
+    font-size: 14px;
+  }
+
+  .video-container {
+    video {
+      width: 100%;
+      max-height: none;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .grid {
+    flex-direction: row;
+  }
+
+  .col-12 {
+    flex: 1 1 100%;
+  }
+
+  .md\:col-6,
+  .lg\:col-6 {
+    flex: 1 1 50%;
+  }
+
+  .card {
+    margin: 10px;
+  }
+
+  .carousel-item {
+    flex-direction: row;
+
+    .item-photo {
+      max-width: 50%;
+      margin-right: 20px;
+    }
+
+    .item-info {
+      text-align: left;
+    }
+  }
+
+  .video-container {
+    video {
+      max-width: 520px;
+      max-height: 340px;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .xl\:col-6 {
+    flex: 1 1 50%;
+  }
+}
+
+
+
+.menu-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 20px;
+
+  .food-menu {
+    flex: 1;
+    text-align: left;
+  }
+
+  .meal-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+
+    .meal-type,
+    .meal-time {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.media-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 360px; // Ensure the height is consistent for all media
+
+  .media-content {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover; // Ensures that the content fits within the container
+  }
+}

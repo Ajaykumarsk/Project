@@ -1,0 +1,83 @@
+// Variables for easy customization
+$frame-size: 120px;
+$frame-border-radius: 10px; // Adjust as needed
+$border-color: #ccc;
+$border-width: 1px;
+$outer-border-color: #007BFF; // Color for the outer border
+$outer-border-width: 1px;
+
+.field {
+  .webcam-section-wrapper {
+    border: $outer-border-width solid $outer-border-color;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .webcam-section {
+    display: flex;
+    justify-content: space-evenly;
+
+    .webcam-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      label {
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .webcam-frame {
+        position: relative;
+        width: $frame-size;
+        height: $frame-size;
+        border-radius: 100%;
+        overflow: hidden;
+        border: $border-width solid $border-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+
+        img.captured-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 100%; // Ensure the captured image is circular
+        }
+      }
+    }
+  }
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.visitor-info {
+  flex: 1;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px; // Add some spacing between the text and buttons
+}
+
+.warning {
+  color: red;
+  font-weight: bold;
+}
+
+p-button {
+  width: 45%; // Adjust width as needed
+}
+
+

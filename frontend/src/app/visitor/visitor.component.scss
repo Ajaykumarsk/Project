@@ -1,0 +1,273 @@
+// Variables for easy customization
+$frame-size: 130px;
+$frame-border-radius: 10px; // Adjust as needed
+$border-color: #ccc;
+$border-width: 1px;
+$outer-border-color: #007BFF; // Color for the outer border
+$outer-border-width: 1px;
+
+.field {
+    .webcam-section-wrapper {
+        border: $outer-border-width solid $outer-border-color;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .webcam-section {
+      display: flex;
+      justify-content: space-evenly;
+
+        .webcam-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            label {
+                margin-bottom: 10px;
+                font-weight: bold;
+                text-align: center;
+            }
+
+            .webcam-frame {
+                position: relative;
+                width: $frame-size;
+                height: $frame-size;
+                border-radius: 100%;
+                overflow: hidden;
+                border: $border-width solid $border-color;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 10px;
+
+                webcam, .captured-image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                   // Ensure the webcam feed and captured image are circular
+                }
+            }
+
+            .actions {
+                display: flex;
+                justify-content: center;
+                gap: 5px;
+            }
+        }
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+        gap: 2px;
+    }
+}
+.visitor-id-card {
+    width: 400px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+  
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  
+    .id-card-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .id-card-header {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+  
+      .id-card-photo {
+        margin: 0 10px;
+  
+        .circle-photo {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+  
+    .verify-toggle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+  
+      .verify-button {
+        margin-bottom: 10px;
+      }
+  
+      .verification-status {
+        font-weight: bold;
+      }
+    }
+  
+    .id-card-details {
+      width: 100%;
+  
+      table {
+        width: 100%;
+        border-collapse: collapse;
+  
+        td {
+          padding: 5px 10px;
+          border: 1px solid #ddd;
+        }
+  
+        tr:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+  
+        tr td:first-child {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  
+
+
+  /* SCSS for Search Input Field */
+
+.p-inputtext {
+  width: 100%;
+  max-width: 400px; /* Adjust the max-width as needed */
+}
+
+
+.visitor-id-card {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  max-width: 500px;
+  background-color: #f9f9f9;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .id-card-container {
+    .id-card-header {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+
+      .id-card-photo {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+
+        .circle-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    .id-card-details {
+      table {
+        width: 100%;
+        border-collapse: collapse;
+
+        td {
+          padding: 8px;
+          border-bottom: 1px solid #ddd;
+
+          &:first-child {
+            font-weight: bold;
+            width: 50%;
+          }
+        }
+      }
+    }
+
+    .verify-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+
+      .verify-button {
+        margin-right: 10px;
+      }
+
+      .verification-status {
+        font-weight: bold;
+        color: #4caf50;
+      }
+    }
+  }
+}
+
+
+// Flexbox layout
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; // Adjust as needed
+  
+  .card {
+    width: 48%; // Adjust as needed
+    margin-bottom: 20px; // Adjust as needed
+  }
+}
+
+// Grid layout
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); // Adjust as needed
+  grid-gap: 20px; // Adjust as needed
+  
+ 
+}
+
+.chart-card {
+  width: 100%;
+  max-width: 800px; /* You can adjust this value */
+  margin: 0 auto;
+}
+
+.chart {
+  width: 100% !important;
+  height: 400px !important; /* Adjust the height as needed */
+}
+
+.card {
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+h5 {
+  margin-bottom: 20px;
+}

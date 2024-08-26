@@ -1,0 +1,222 @@
+<div class="layout-topbar">
+  <a routerlink="" class="layout-topbar-logo" href="">
+    <div style="width: 180px; height: auto; display: flex; align-items: center; justify-content: center;">
+      <img src="assets/layout/images/Digital-i.png" alt="logo" style="max-width: 100%; max-height: 100%; height: auto;">
+    </div>
+  </a>
+  <button #menubutton class="p-link layout-menu-button layout-topbar-button" (click)="layoutService.onMenuToggle()">
+    <i class="pi pi-bars"></i>
+  </button>
+  
+  <button #topbarmenubutton class="p-link layout-topbar-menu-button layout-topbar-button" (click)="layoutService.showProfileSidebar()">
+    <i class="pi pi-ellipsis-v"></i>
+  </button>
+  <div #topbarmenu class="layout-topbar-menu" [ngClass]="{'layout-topbar-menu-mobile-active': layoutService.state.profileSidebarVisible}">
+    <!-- Other template code -->
+
+    <button *ngIf="userRole === 'chairman'" (click)="toggleChairmanDropdown()" class="p-link">
+      <div class="badge-container"></div>
+      <i class="pi pi-bell text-3xl"></i>
+      <span class="badge" *ngIf="chairmanNotificationCount">{{ chairmanNotificationCount }}</span>
+    </button>
+
+    <p-dialog header="Chairman Notifications" [(visible)]="displayChairmanNotificationDialog" modal="modal" [style]="{'width': '50vw'}">
+      <div *ngIf="chairmanNotifications.length > 0; else noNotifications">
+        <div class="grid p-fluid">
+          <div class="col-12 lg:col-6" *ngFor="let notification of chairmanNotifications">
+            <div class="card">
+              <div class="card-header">
+                <h5>Chairman Notification</h5>
+              </div>
+              <div class="content-wrapper">
+                <div class="visitor-info">
+                  <p>Name: {{ notification.visitor_name }}</p>
+                  <p>Badge ID: {{ notification.badge_id }}</p>
+                  <p>Company: {{ notification.company_name }}</p>
+                  <p>Area to Visit: {{ notification.area_to_visit }}</p>
+                  <div class="actions">
+                    <p-button label="Reject" (click)="markChairmanNotificationAsRead(notification)"></p-button>
+                    <p-button label="Verify" (click)="verifyChairmanNotification(notification)"></p-button>
+                  </div>
+                </div>
+      
+                <div class="field">
+                  <div class="webcam-section">
+                    <div class="webcam-section-wrapper">
+                      <!-- Visitor Photo Webcam Container -->
+                      <div class="webcam-container">
+                        <label for="visitorPhoto">Visitor Photo</label>
+                        <div class="webcam-frame">
+                          <!-- Display captured visitor photo -->
+                          <img *ngIf="notification.visitor_photo" [src]="notification.visitor_photo" alt="Visitor Photo" class="captured-image"/>
+                          <p *ngIf="!notification.visitor_photo">No visitor photo available</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <ng-template #noNotifications>
+        <p>No new notifications</p>
+      </ng-template>
+    </p-dialog>
+    
+   <!-- Front Office Notifications Button -->
+<button *ngIf="userRole === 'front_office'" (click)="toggleFrontOfficeDropdown()" class="p-link">
+  <div class="badge-container"></div>
+  <i class="pi pi-bell text-3xl"></i>
+  <span class="badge" *ngIf="frontOfficeNotificationCount">{{ frontOfficeNotificationCount }}</span>
+</button>
+
+<!-- Front Office Notifications Dialog -->
+<p-dialog header="Front Office Notifications" [(visible)]="displayFrontOfficeNotificationDialog" modal="modal" [style]="{'width': '50vw'}">
+  <div *ngIf="frontOfficeNotifications.length > 0; else noNotifications">
+    <div class="grid p-fluid">
+      <div class="col-12 lg:col-6" *ngFor="let notification of frontOfficeNotifications">
+        <div class="card">
+          <div class="card-header">
+            <h5>Front Office Notification</h5>
+          </div>
+          <div class="content-wrapper">
+            <div class="visitor-info">
+              <p>Name: {{ notification.visitor_name }}</p>
+              <p>Badge ID: {{ notification.badge_id }}</p>
+              <p>Company: {{ notification.company_name }}</p>
+              <p>Area to Visit: {{ notification.area_to_visit }}</p>
+              <div class="actions">
+                <p-button label="Reject" (click)="markFrontOfficeNotificationAsRead(notification)"></p-button>
+                <p-button label="Verify" (click)="verifyFrontOfficeNotification(notification)"></p-button>
+              </div>
+            </div>
+  
+            <div class="field">
+              <div class="webcam-section">
+                <div class="webcam-section-wrapper">
+                  <!-- Visitor Photo Webcam Container -->
+                  <div class="webcam-container">
+                    <label for="visitorPhoto">Visitor Photo</label>
+                    <div class="webcam-frame">
+                      <!-- Display captured visitor photo -->
+                      <img *ngIf="notification.visitor_photo" [src]="notification.visitor_photo" alt="Visitor Photo" class="captured-image"/>
+                      <p *ngIf="!notification.visitor_photo">No visitor photo available</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noNotifications>
+    <p>No new notifications</p>
+  </ng-template>
+</p-dialog>
+
+
+<!-- Approve Admin Notifications Button -->
+<button *ngIf="userRole === 'approveadmin'" (click)="toggleApproveAdminDropdown()" class="p-link">
+  <div class="badge-container"></div>
+  <i class="pi pi-bell text-3xl"></i>
+  <span class="badge" *ngIf="approveAdminNotificationCount">{{ approveAdminNotificationCount }}</span>
+</button>
+
+<!-- Approve Admin Notifications Dialog -->
+<p-dialog header="Approve Admin Notifications" [(visible)]="displayApproveAdminNotificationDialog" modal="modal" [style]="{'width': '50vw'}">
+  <div *ngIf="approveAdminNotifications.length > 0; else noNotifications">
+    <div class="grid p-fluid">
+      <div class="col-12 lg:col-6" *ngFor="let notification of approveAdminNotifications">
+        <div class="card">
+          <div class="card-header">
+            <h5>Approve Admin Notification</h5>
+          </div>
+          <div class="content-wrapper">
+            <div class="visitor-info">
+              <p>Name: {{ notification.visitor_name }}</p>
+              <p>Badge ID: {{ notification.badge_id }}</p>
+              <p>Company: {{ notification.company_name }}</p>
+              <p>Area to Visit: {{ notification.area_to_visit }}</p>
+              <div class="actions">
+                <p-button label="Reject" (click)="markApproveAdminNotificationAsRead(notification)"></p-button>
+                <p-button label="Approve" (click)="verifyApproveAdminNotification(notification)"></p-button>
+              </div>
+            </div>
+  
+            <div class="field">
+              <div class="webcam-section">
+                <div class="webcam-section-wrapper">
+                  <!-- Visitor Photo Webcam Container -->
+                  <div class="webcam-container">
+                    <label for="visitorPhoto">Visitor Photo</label>
+                    <div class="webcam-frame">
+                      <!-- Display captured visitor photo -->
+                      <img *ngIf="notification.visitor_photo" [src]="notification.visitor_photo" alt="Visitor Photo" class="captured-image"/>
+                      <p *ngIf="!notification.visitor_photo">No visitor photo available</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noNotifications>
+    <p>No new notifications</p>
+  </ng-template>
+</p-dialog>
+
+
+    <!-- Approved Visitors Button for Security -->
+<button *ngIf="userRole === 'security'" (click)="toggleApprovedDropdown()" class="p-link">
+  <div class="badge-container"></div>
+  <i class="pi pi-bell text-3xl"></i>
+  <span class="badge" *ngIf="approvedVisitorsCount">{{ approvedVisitorsCount }}</span>
+</button>
+<div class="dropdown-menu" *ngIf="isApprovedDropdownVisible && userRole === 'security'">
+  <div class="dropdown-header">
+      <strong>VISITOR PASS GENERATE CARD</strong>
+    </div>
+  
+  <ul>
+    <li *ngFor="let visitor of approvedVisitors">
+      <div>
+        <strong>Approved Visitor</strong><br>
+        <strong>{{ visitor.visitor_name }}</strong><br>
+        Badge ID: {{ visitor.badge_id }}<br>
+        Company: {{ visitor.company_name }}<br>
+        Area to Visit: {{ visitor.area_to_visit }}<br>
+        <button (click)="markApprovedAsRead(visitor)" class="mark-read-button">Mark as Read</button>
+      </div>
+    </li>
+  </ul>
+</div>
+<!-- Chairman Notifications Button -->
+
+
+<div class="user-profile-container" (click)="toggleUserProfile()">
+  <button class="p-link layout-topbar-button">
+    <i class="pi pi-user"></i>
+  </button>
+  <div class="user-profile-dropdown" *ngIf="isUserProfileVisible">
+    <h2>User Profile</h2>
+    <div class="profile-details">
+      <p><strong>Name:</strong> {{ userName }}</p>
+      <p><strong>Role:</strong> {{ userRole }}</p>
+    </div>
+  </div>
+</div>
+    <button class="p-link layout-topbar-button" (click)="logout()">
+      <i class="pi pi-sign-out"></i>
+    </button>
+  </div>
+</div>

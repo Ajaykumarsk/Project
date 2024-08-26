@@ -1,0 +1,28 @@
+/* caterermenu.component.scss */
+
+/* Modal dialog styling */
+.p-dialog {
+    .p-dialog-content {
+      padding: 2rem;
+    }
+  }
+  
+  /* Form field styling */
+  .p-field {
+    margin-bottom: 1rem;
+  
+    label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+  
+    input, 
+    p-dropdown {
+      width: 100%;
+      padding: 0.5rem;
+    }
+  
+  }
+  
+ 

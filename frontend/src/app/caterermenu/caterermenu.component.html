@@ -1,0 +1,124 @@
+<div class="container mt-4" [formGroup]="catererMenuForm">
+
+    <!-- Modal Dialog for Adding Caterer Menu -->
+    <p-dialog header="Add Caterer Menu" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '500px'}">
+        <form (ngSubmit)="addCatererMenu()" [formGroup]="catererMenuForm">
+            <!-- Caterer Name Dropdown -->
+            <div class="p-field">
+                <label for="catererName">Caterer Name</label>
+                <p-dropdown 
+                    id="catererName" 
+                    [options]="catererOptions" 
+                    formControlName="catererName" 
+                    optionLabel="label"  
+                    placeholder="Select Caterer">
+                </p-dropdown>
+            </div>
+            
+            <!-- Food Type Dropdown -->
+            <div class="p-field">
+                <label for="foodType">Food Type</label>
+                <p-dropdown 
+                id="foodType" 
+                [options]="foodTypeOptions" 
+                formControlName="foodType" 
+                optionLabel="label" 
+                placeholder="Select Food Type"
+                (onChange)="filterFoodMenus()">
+            </p-dropdown>
+            
+            </div>
+            
+            <!-- Food Menu MultiSelect -->
+            <div class="p-field">
+                <label for="foodMenu">Food Menu</label>
+                <p-multiSelect
+                id="foodMenu"
+                formControlName="foodMenu"
+                [options]="filteredFoodMenuOptions"
+                optionLabel="label"
+                optionValue="value"
+                placeholder="Select Food Menus"
+                [style]="{'width':'15rem'}">
+            </p-multiSelect>
+            
+            </div>
+
+           
+
+            <!-- Valid From Date Picker -->
+            <div class="p-field">
+                <label for="valid_from">Valid From</label>
+                <input id="valid_from" type="date" pInputText formControlName="valid_from" placeholder="Valid From">
+            </div>
+
+            <!-- Add and Cancel Buttons -->
+            <div class="flex justify-content-center gap-2">
+                <p-button label="Add" type="submit" class="p-button-primary"></p-button>
+                <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <!-- Caterer Menu Table -->
+    <div class="p-grid">
+        <div class="col-12">
+            <div class="card">
+                <p-table [value]="catererMenus" styleClass="p-datatable-gridlines">
+                    <!-- Table Caption -->
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+                        </div>
+                    </ng-template>
+
+                    <!-- Table Header -->
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>Caterer Name</th>
+                            <th>Food Name</th>
+                            <th>Menu</th>
+                            <th>Quantity</th>
+                            <th>Calorie</th>
+                            <th>Item Photo</th>
+                            <th>Valid From</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+
+                    <!-- Table Body -->
+                    <ng-template pTemplate="body" let-menu>
+                        <tr *ngFor="let detail of menu.food_menu_details">
+                            <td>{{ menu.id }}</td>
+                            <td>{{ getCatererName(menu.caterer_name) }}</td>
+                            <td>{{ detail.name }}</td>
+                            <td>{{ detail.menu }}</td>
+                            <td>{{ detail.quantity }}</td>
+                            <td>{{ detail.calorie }}</td>
+                            <td>
+                                <img [src]="detail.item_photo" alt="Item Photo" style="width: 100px; height: auto;">
+                            </td>
+                            <td>{{ menu.valid_from | date }}</td>
+                            <td>
+                                <div class="flex justify-content-center gap-2">
+                                    <button pButton icon="pi pi-pencil" [routerLink]="'/updatecaterermenu/' + menu.id" class="p-button-success"></button>
+                                    <p-toast></p-toast>
+                                    <p-confirmPopup>
+                                        <ng-template pTemplate="content">
+                                            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                                <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                                                <p>Please confirm to delete this record</p>
+                                            </div>
+                                        </ng-template>
+                                    </p-confirmPopup>
+                                    <p-button (click)="confirmDelete($event, menu.id)" icon="pi pi-trash"></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

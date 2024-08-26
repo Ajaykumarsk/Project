@@ -1,0 +1,384 @@
+<div class="card">
+  <p-toast></p-toast>
+  
+
+    <form [formGroup]="visitorForm">
+      <p-toast></p-toast>
+
+      <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-search"></i>
+        </span>
+        <input type="text" pInputText placeholder="Search by Mobile no & BadgeID" formControlName="searchValue" (keydown.enter)="searchByMobile()" />
+      </div>
+      <br/>
+    <div class="grid flex">
+        <div class="col-12 md:col-8 lg:col-9 xl:col-10">
+            <div class="grid p-fluid mt-1">
+
+  <!-- Visitor Pass No -->
+  <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input id="visitor_pass_no" pInputText formControlName="visitor_pass_no"   [disabled]="true" />
+  <label for="visitor_pass_no">Visitor Pass No</label>
+</span>
+</div>
+
+<!-- Badge ID -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="text" id="badge_id" pInputText formControlName="badge_id" />
+  <label for="badge_id">Badge ID *</label>
+</span>
+</div>
+<!-- Visitor Name -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="text" id="visitor_name" pInputText formControlName="visitor_name"/>
+  <label for="visitor_name">Visitor Name *</label>
+</span>
+</div>
+<!-- Mobile No -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="text" id="mobile_no" pInputText formControlName="mobile_no"/>
+  <label for="mobile_no">Mobile No *</label>
+</span>
+</div>
+<!-- Email -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="text" id="email" pInputText formControlName="email"/>
+  <label for="email">Email </label>
+</span>
+</div>
+<!-- Designation -->
+<div class="p-field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="designationOptions" formControlName="designation"></p-dropdown>
+  <label for="designation">Designation</label>
+</span>
+</div>
+
+<!-- Department -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="departments" formControlName="department"></p-dropdown>
+  <label for="department">Department</label>
+</span>
+</div>
+<!-- Nationality -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="nationalities" formControlName="nationality"></p-dropdown>
+  <label for="nationality">Nationality</label>
+         </span>
+</div>
+<!-- Total Visitor -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="number" id="total_visitor" pInputText formControlName="total_visitor"/>
+  <label for="total_visitor">Total Visitor *</label>
+</span>
+</div>
+<!-- Company Name -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+<input type="text" id="company_name" pInputText formControlName="company_name"/>
+<label for="company_name">Company Name *</label>
+</span>
+</div>
+<!-- Company Contact No -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+<input type="text" id="company_contact_no" pInputText formControlName="company_contact_no"/>
+<label for="company_contact_no">Company Contact No</label>
+</span>
+</div>
+<!-- Company Address -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+<input type="text" id="company_address" pInputText formControlName="company_address"/>
+<label for="company_address">Company Address</label>
+</span>
+</div>
+<!-- Area To Visit -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="areaToVisitOptions" formControlName="area_to_visit"></p-dropdown>
+  <label for="area_to_visit">Area To Visit *</label>
+</span>
+</div>
+
+<!-- Type of Visitor -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+  <span class="p-float-label">
+    <p-dropdown [options]="visitorTypeOptions" formControlName="type_of_visitor" id="type_of_visitor"></p-dropdown>
+    <label for="type_of_visitor">Type of Visitor *</label>
+  </span>
+</div>
+
+<!-- Meeting Purpose -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="meetingPurposeOptions" formControlName="meeting_purpose"></p-dropdown>
+  <label for="meeting_purpose">Meeting Purpose *</label>
+</span>
+</div>
+
+<!-- ID Proof -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="idProofOptions" formControlName="id_proof"></p-dropdown>
+  <label for="id_proof">ID Proof</label>
+</span>
+</div>
+<!-- ID Proof Number -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="text" id="id_proof_number" pInputText formControlName="id_proof_number"/>
+  <label for="id_proof_number">ID Proof Number</label>
+</span>
+</div>
+
+<!-- Valid Pass From -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<p-floatLabel>
+<p-calendar id="valid_pass_from"  [showIcon]="true"  formControlName="valid_pass_from" dateFormat="yy-mm-dd"></p-calendar>
+<label for="valid_pass_from">Valid Pass From *</label>
+</p-floatLabel>
+</div>
+<!-- Valid Pass To -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<p-floatLabel>
+<p-calendar id="valid_pass_to"  [showIcon]="true" formControlName="valid_pass_to" dateFormat="yy-mm-dd"></p-calendar>
+<label for="valid_pass_to">Valid Pass To *</label>
+</p-floatLabel>
+</div>
+<!-- Visitor Status -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+<p-dropdown [options]="visitorStatusOptions" formControlName="visitor_status"></p-dropdown>
+<label for="visitor_status">Visitor Status *</label>
+</span>
+</div>
+
+<!-- Expecting Stay Hours -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+<input type="number" id="expecting_stay_hours" pInputText formControlName="expecting_stay_hours"/>
+<label for="expecting_stay_hours">Expecting Stay Hours *</label>
+</span>
+</div>
+
+            </div>
+            
+        </div>
+        <div class="field col-12 md:col-3 lg:col-3 xl:col-2 ">
+          <div class="webcam-section justify-content-center">
+              <div class="webcam-section-wrapper">
+                  <!-- Visitor Photo Webcam Container -->
+                  <div class="webcam-container">
+                      <label for="visitorPhoto">Visitor Photo</label>
+                      <div class="webcam-frame">
+                          <webcam [height]="260" [width]="190" [trigger]="triggerVisitorObservable" 
+                                  (imageCapture)="handleVisitorPhoto($event)" *ngIf="showVisitorWebcam"
+                                  [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                                  [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
+                                  (initError)="handleInitError($event)">
+                          </webcam>
+                          <img *ngIf="visitorPhoto" [src]="visitorPhoto" alt="Captured Visitor Photo" class="captured-image"/>
+                      </div>
+                      <!-- Action Buttons for Visitor Photo -->
+                      <div class="actions">
+                          <div class="flex justify-content-center gap-2">
+                              <p-button size="small" icon="pi pi-undo" (click)="resetVisitorPhoto()"></p-button>
+                              <p-button icon="pi pi-camera" size="small" [raised]="true" (click)="triggerVisitorSnapshot();" severity="secondary"></p-button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              
+          </div>
+          <div class="webcam-section justify-content-center">
+            <div class="webcam-section-wrapper">
+                <!-- ID Proof Webcam Container -->
+                <div class="webcam-container gap-2">
+                    <label for="idProofPhoto">ID Proof Photo</label>
+                    <div class="webcam-frame">
+                        <webcam [height]="260" [width]="190" [trigger]="triggerIdObservable"
+                                (imageCapture)="handleIdProof($event)" *ngIf="showIdWebcam"
+                                [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                                [videoOptions]="videoOptions" (cameraSwitched)="cameraWasSwitched($event)"
+                                (initError)="handleInitError($event)">
+                        </webcam>
+                        <img *ngIf="idProofPhoto" [src]="idProofPhoto" alt="Captured ID Proof Photo" class="captured-image"/>
+                    </div>
+                    <!-- Action Buttons for ID Proof -->
+                    <div class="actions">
+                        <div class="flex justify-content-center gap-2">
+                            <p-button size="small" icon="pi pi-undo" (click)="resetIdproofPhoto()"></p-button>
+                            <p-button icon="pi pi-camera" size="small" [raised]="true" (click)="triggerIdSnapshot();" severity="secondary"></p-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              
+          </div>
+      </div>
+     
+
+
+      <div class="col-12 md:col-8 lg:col-9 xl:col-9">
+        <div class="grid p-fluid mt-1">
+
+
+
+
+
+
+        </div>
+        
+    </div>
+     
+    </div>
+
+    <div class="grid flex justify-content-center">
+    <div class="col-12">
+        <div class="grid p-fluid">
+            
+
+        </div>
+        
+            <p-fieldset [toggleable]="true">
+            <ng-template pTemplate="header">
+                <div class="flex align-items-center gap-2 px-2">
+                   
+                    <span class="font-bold">Host Details</span>
+                </div>
+            </ng-template>
+            <div class="grid flex justify-content-center">
+                <div class="col-12">
+                    <div class="grid p-fluid">
+             <!-- Select Employee -->
+             <div class="p-field col-12 md:col-3">
+              <div *ngIf="users.length > 0">
+                <span class="p-float-label">
+                  <p-dropdown 
+                    [options]="users" 
+                    optionLabel="name" 
+                    optionValue="id" 
+                    placeholder="Select an employee" 
+                    (onChange)="selectEmployee($event.value)"
+                    inputId="selectEmployeeDropdown"
+                    [filter]="true"> <!-- Enable filtering here -->
+                  </p-dropdown>
+                  <label for="selectEmployeeDropdown">Select Employee *</label>
+                </span>
+              </div>
+              <div *ngIf="users.length === 0">
+                <p>No employees found.</p>
+              </div>
+            </div>
+            
+            
+            
+  
+            <!-- Host Department -->
+            <div class="p-field col-12 md:col-3">
+              <span class="p-float-label">
+                <input type="text" id="host_department" pInputText formControlName="host_department"/>
+                <label for="host_department">Host Department</label>
+              </span>
+            </div>
+  
+            <!-- Host Email ID -->
+            <div class="p-field col-12 md:col-3">
+              <span class="p-float-label">
+                <input type="text" id="host_email_id" pInputText formControlName="host_email_id"/>
+                <label for="host_email_id">Host Email ID</label>
+              </span>
+            </div>
+  
+            <!-- Host Contact Details -->
+            <div class="p-field col-12 md:col-3">
+              <span class="p-float-label">
+                <input type="text" id="host_contact_details" pInputText formControlName="host_contact_details"/>
+                <label for="host_contact_details">Host Contact Details</label>
+              </span>
+           
+
+        </div></div></div></div>
+            </p-fieldset>
+            <br>
+            <p-fieldset [toggleable]="true">
+                <ng-template pTemplate="header">
+                    <div class="flex align-items-center gap-2 px-2">
+                       
+                        <span class="font-bold">Item Caring</span>
+                    </div>
+                </ng-template>
+                <div class="grid flex justify-content-center">
+                    <div class="col-12">
+                        <div class="grid p-fluid">
+          <!-- Item Caring -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+<p-dropdown [options]="itemCarings" formControlName="item_caring"></p-dropdown>
+<label for="item_caring">Item Caring</label>
+</span>
+</div>
+
+<!-- Make & Serial No -->
+<div class="field col-12 md:col-6">
+<span class="p-float-label">
+  <input type="text" id="make_serial_no" pInputText formControlName="make_serial_no"/>
+  <label for="make_serial_no">Make & Serial No</label>
+</span>
+</div>
+
+ 
+                </div></div></div>
+                </p-fieldset>
+              <br>
+              <p-fieldset [toggleable]="true">
+                  <ng-template pTemplate="header">
+                      <div class="flex align-items-center gap-2 px-2">
+                         
+                          <span class="font-bold">Vehicals</span>
+                      </div>
+                  </ng-template>
+                  <div class="grid flex justify-content-center">
+                      <div class="col-12">
+                          <div class="grid p-fluid">
+          
+ <!-- Vehicle Number -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <p-dropdown [options]="vehicleTypes" formControlName="vehicle_type"></p-dropdown>
+  <label for="vehicle_type">Vehicle Type</label>
+</span>
+</div>
+<!-- Vehicle Number -->
+<div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+<span class="p-float-label">
+  <input type="text" id="vehicle_number" pInputText formControlName="vehicle_number"/>
+  <label for="vehicle_number">Vehicle Number</label>
+</span>
+</div>
+
+   
+                  </div></div></div>
+                  </p-fieldset>
+        
+    </div>
+    </div>
+
+    <div class="flex pt-4 justify-content-end gap-2">
+        
+         <button  pButton type="submit" label="Reset" icon="pi pi-undo" (click)="resetForm()" ></button>
+        <button  pButton type="submit" label="Submit" icon="pi pi-check" (click)="submitForm()" [disabled]="!visitorForm.valid"></button>
+
+    </div>
+</form>
+</div>

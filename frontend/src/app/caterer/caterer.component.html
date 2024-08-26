@@ -1,0 +1,78 @@
+<div class="container mt-4" [formGroup]="catererForm">
+
+    <!-- Modal Dialog for Adding Caterer -->
+    <p-dialog header="Add Caterer" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '400px'}">
+        <form (ngSubmit)="addCaterer()" [formGroup]="catererForm">
+            <div class="p-field">
+                <label for="catererName">Caterer Name</label>
+                <input id="catererName" type="text" pInputText formControlName="catererName" placeholder="Name">
+            </div>
+            <div class="p-field">
+                <label for="canteenItemName">Canteen Item Name</label>
+                <input id="canteenItemName" type="text" pInputText formControlName="canteenItemName" placeholder="Canteen Item">
+            </div>
+            <div class="p-field">
+                <label for="validFrom">Valid From</label>
+                <input id="validFrom" type="date" pInputText formControlName="validFrom" placeholder="Valid From">
+            </div>
+            <div class="p-field">
+                <label for="validTo">Valid To</label>
+                <input id="validTo" type="date" pInputText formControlName="validTo" placeholder="Valid To">
+            </div>
+              
+            <div class="flex justify-content-center gap-2">
+                <p-button label="Add" type="submit" class="p-button-primary"></p-button>
+                <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+            </div>
+        </form>
+    </p-dialog>
+  
+    <!-- Caterer Table -->
+    <div class="p-grid">
+        <div class="col-12">
+            <div class="card">
+                <p-table [value]="caterers" styleClass="p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>Caterer Name</th>
+                            <th>Canteen Item Name</th>
+                            <th>Valid From</th>
+                            <th>Valid To</th>
+                            <th>Action</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-caterer>
+                        <tr>
+                            <td>{{ caterer.id }}</td>
+                            <td>{{ caterer.caterer_name }}</td>
+                            <td>{{ caterer.canteen_item_name }}</td>
+                            <td>{{ caterer.valid_from }}</td>
+                            <td>{{ caterer.valid_to }}</td>
+                            <td>
+                                <div class="flex justify-content-center gap-2">
+                                    <button pButton icon="pi pi-pencil" [routerLink]="'/updatecaterer/' + caterer.id" class="p-button-success"></button>
+                                    <p-toast></p-toast>
+                                    <p-confirmPopup>
+                                        <ng-template pTemplate="content">
+                                            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                                <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                                                <p>Please confirm to delete this record</p>
+                                            </div>
+                                        </ng-template>
+                                    </p-confirmPopup>
+                                    <p-button (click)="confirm($event, caterer.id)" icon="pi pi-trash"></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

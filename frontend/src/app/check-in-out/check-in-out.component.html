@@ -1,0 +1,78 @@
+<!-- visitor.component.html -->
+
+<div class="card p-field">
+  <label for="searchInput"></label>
+  <input id="searchInput" type="text" pInputText placeholder="Search by visitor name" [(ngModel)]="searchTerm" (input)="searchVisitors()" class="mr-2"/>
+  <p-button type="button" (click)="clearSearch()">Clear</p-button>
+</div>
+
+
+<div class="grid p-fluid">
+  <div class="col-12 lg:col-6" *ngFor="let visitor of filteredVisitors">
+    <div class="card" id="visitorCard-{{ visitor.visitor_pass_no }}">
+      <h5>Visitor Pass {{ visitor.visitor_pass_no }}</h5>
+      
+      <div class="content-wrapper">
+        <div class="visitor-info">
+          <p>Name: {{ visitor.visitor_name }}</p>
+          <p>Pass Type: {{ visitor.type_of_visitor }}</p>
+          <p>Visitor Type: {{ getVisitorType(visitor.valid_pass_from) }}</p>
+          <p>Company Name: {{ visitor.company_name }}</p>
+          <p>Whom to meet: {{ visitor.select_employee }}</p>
+          <p>Visiting purpose: {{ visitor.meeting_purpose }}</p>
+          <!-- check-in-out.component.html -->
+          <p>Valid From & To: {{ visitor.valid_pass_from | date }} | {{ visitor.valid_pass_to | date }}</p>
+          <p>Check In: {{ visitor.check_in_time ? (visitor.check_in_time | date:'yyyy-MM-dd hh:mm:ss a') : 'Not Checked In' }}</p>
+          <p>Check Out: {{ visitor.check_out_time ? (visitor.check_out_time | date:'yyyy-MM-dd hh:mm:ss a') : 'Not Checked Out' }}</p>
+
+
+          <p>Approved: {{ visitor.is_approved ? 'Yes' : 'No' }}</p>
+          <p>Verified: {{ visitor.is_verified ? 'Yes' : 'No' }}</p>
+        
+
+          <p *ngIf="!visitor.is_verified" class="warning">Visitor is not verified.</p>
+          <p *ngIf="!visitor.is_approved" class="warning">Visitor is not approved.</p>
+
+          <div class="button-container">
+            <p-button icon="pi pi-sign-in" (click)="onCheckInToggle(visitor)" [disabled]="!visitor.is_verified || !visitor.is_approved || visitor.check_in_time"></p-button>
+            <p-button icon="pi pi-sign-out" (click)="onCheckOutToggle(visitor)" [disabled]="!visitor.is_verified || !visitor.is_approved || visitor.check_out_time"></p-button>
+            <p-button icon="pi pi-print" (click)="printVisitorCard(visitor)"></p-button>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="webcam-section">
+            <div class="webcam-section-wrapper">
+              <!-- Visitor Photo Webcam Container -->
+              <div class="webcam-container">
+                <label for="visitorPhoto">Visitor Photo</label>
+                <div class="webcam-frame">
+                  <!-- Display captured visitor photo -->
+                  <img *ngIf="visitor.visitor_photo" [src]="visitor.visitor_photo" alt="Visitor Photo" class="captured-image"/>
+                  <p *ngIf="!visitor.visitor_photo">No visitor photo available</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="webcam-section">
+            <div class="webcam-section-wrapper">
+              <!-- Visitor Photo Webcam Container -->
+              <div class="webcam-container">
+                <label for="visitorPhoto">Id Proof Photo</label>
+                <div class="webcam-frame">
+                  <!-- Display captured visitor photo -->
+                  <img *ngIf="visitor.id_proof_photo" [src]="visitor.id_proof_photo" alt="Visitor Photo" class="captured-image"/>
+                  <p *ngIf="!visitor.id_proof_photo">No visitor photo available</p>
+                </div>
+                
+              </div>
+              
+            </div>
+          </div>
+        
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

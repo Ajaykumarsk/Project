@@ -1,0 +1,25 @@
+<div class="Update Canteen Food Consummation Timing" class="p-mb-4">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="p-fluid">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input id="name" pInputText formControlName="name" />
+                
+            </div>
+            <div class="p-field">
+                <label for="begin_time">Begin Time</label>
+                <input id="begin_time" pInputText formControlName="begin_time" type="time" />
+                
+            </div>
+            <div class="p-field">
+                <label for="end_time">End Time</label>
+                <input id="end_time" pInputText formControlName="end_time" type="time" />
+                
+            </div>
+        </div>
+        <p-footer>
+            <button pButton type="button" label="Cancel" icon="pi pi-times" routerLink="/canteen-food-consummation" ></button>
+            <button pButton type="submit" label="Update" icon="pi pi-check" [disabled]="!form.valid"></button>
+        </p-footer>
+    </form>
+</div>

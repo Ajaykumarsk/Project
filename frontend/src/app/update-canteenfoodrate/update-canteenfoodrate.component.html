@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="p-fluid">
+    <div class="p-field">
+      <label for="caterer">Caterer</label>
+      <p-dropdown 
+        id="caterer" 
+        [options]="caterers" 
+        optionLabel="caterer_name" 
+        formControlName="caterer"
+        [autoDisplayFirst]="false"
+        [showClear]="true">
+      </p-dropdown>
+    </div>
+    <div class="p-field">
+      <label for="canteen_item_name">Canteen Item Name</label>
+      <input id="canteen_item_name" type="text" pInputText formControlName="canteen_item_name">
+    </div>
+    <div class="p-field">
+      <label for="valid_from">Valid From</label>
+      <input id="valid_from" type="date" pInputText formControlName="valid_from">
+    </div>
+    <div class="p-field">
+      <label for="valid_to">Valid To</label>
+      <input id="valid_to" type="date" pInputText formControlName="valid_to">
+    </div>
+    <div class="p-field">
+      <label for="employer_contribution">Employer Contribution</label>
+      <input id="employer_contribution" type="number" pInputText formControlName="employer_contribution">
+    </div>
+    <div class="p-field">
+      <label for="employee_contribution">Employee Contribution</label>
+      <input id="employee_contribution" type="number" pInputText formControlName="employee_contribution">
+    </div>
+    <div class="p-field">
+      <label for="caterer_price">Caterer Price</label>
+      <input id="caterer_price" type="number" pInputText formControlName="caterer_price">
+    </div>
+    <div class="p-field">
+      <label for="employee_type">Employee Type</label>
+      <p-dropdown 
+        id="employee_type" 
+        [options]="employeeTypes" 
+        optionLabel="name" 
+        formControlName="employee_type"
+        [autoDisplayFirst]="false"
+        [showClear]="true">
+      </p-dropdown>
+    </div>
+    <div class="p-field">
+      <button type="submit" pButton label="Save" [disabled]="!form.valid"></button>
+      <button type="button" pButton label="Cancel" class="p-button-secondary" routerLink="/canteenfoodrate"></button>
+    </div>
+  </div>
+</form>

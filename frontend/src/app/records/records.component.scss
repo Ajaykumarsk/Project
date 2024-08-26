@@ -1,0 +1,27 @@
+.records-container {
+  .form-section {
+    margin-bottom: 20px; /* Adjust margin as needed */
+    display: flex;
+    align-items: center;
+
+    p-calendar {
+      margin-right: 10px; /* Adjust margin between calendars */
+    }
+
+    button {
+      margin-left: 10px; /* Adjust margin between button and calendars */
+    }
+  }
+}
+
+
+.fit-cell {
+  img {
+    max-width: 100px; /* Adjust width as needed */
+    max-height: 100px; /* Adjust height as needed */
+    display: block; /* Ensures the image is displayed as a block element */
+    margin: auto; /* Centers the image horizontally */
+    border-radius: 50%; /* Makes the image round */
+    overflow: hidden; /* Ensures the image stays within the round shape */
+  }
+}

@@ -1,0 +1,50 @@
+from django.urls import path
+
+from .views import CanteenFoodConsummationTimingDetail, CanteenFoodConsummationTimingListCreateAPIView, CanteenFoodMenuListCreateView, CanteenFoodMenuRetrieveUpdateDestroyView, CanteenFoodOrderTimingDetail, CanteenFoodOrderTimingListCreateAPIView, CanteenFoodRateListCreateView, CanteenFoodRateRetrieveUpdateDestroyView, CatererListCreateAPIView, CatererMenuDetailView, CatererMenuListCreateView, CatererRetrieveUpdateDestroyView, CircularDetailView, CircularListCreateView, CircularMenuDetailView, CircularMenuListCreateView, CompanyDetail, CompanyListCreateAPIView, DepartmentDetail, DepartmentListCreateAPIView, EmployeeTypeDetail, EmployeeTypeListCreateAPIView, LocationDetail, LocationListCreateAPIView, LoginView, LogoutView, NextVisitorPassView, RegisterView, RestrictedView, UserAll, UserList, UserDetail, VisitorDetailView, VisitorListCreateView, VisitorSearchAPIView, VisitorViewSet, download_users_excel, export_visitors, get_canteen_food_menus_by_ids, helloWorld
+
+urlpatterns = [
+    path('users/', UserList.as_view(), name="user-list"),
+    path('user/', UserAll.as_view(), name="users"),
+    path('users/<int:pk>', UserDetail.as_view(), name='user-detail'),
+    path('hello/', helloWorld, name='hello-world'),
+    path('login/', LoginView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('restricted/',RestrictedView.as_view(),name='restricted'),
+    path('departments/', DepartmentListCreateAPIView.as_view(), name='department-list-create'),
+    path('companys/', CompanyListCreateAPIView.as_view(), name='company-list-create'),
+    path('companys/<int:pk>/', CompanyDetail.as_view(), name='company-detail'),
+    path('employeetypes/', EmployeeTypeListCreateAPIView.as_view(), name='employeetype-list-create'),
+    path('employeetypes/<int:pk>/', EmployeeTypeDetail.as_view(), name='employeetype-detail'),
+    path('locations/', LocationListCreateAPIView.as_view(), name='location-list-create'),
+    path('departments/<int:pk>/', DepartmentDetail.as_view(), name='department-detail'),
+    path('locations/<int:pk>/',LocationDetail.as_view(),name='location-detail'),
+    path('download-users-excel/', download_users_excel, name='download_users_excel'),
+    path('visitors/', VisitorListCreateView.as_view(), name='visitor-list-create'),
+    path('visitors/<int:pk>/', VisitorDetailView.as_view(), name='visitor-detail'),
+    path('visitors/search/', VisitorSearchAPIView.as_view(), name='visitor-search'),
+    path('visitors/export', export_visitors, name='export_visitors'),
+
+    path('new-visitor-count/', VisitorViewSet.as_view({'get': 'get_new_visitor_count'}), name='new-visitor-count'),
+    path('approved-visitor-count/', VisitorViewSet.as_view({'get': 'get_approved_visitor_count'}), name='approved-visitor-count'),
+    path('recent-visitors/', VisitorViewSet.as_view({'get': 'get_recent_visitors'}), name='recent-visitors'),
+    
+    path('api/logout/', LogoutView.as_view(), name='logout'),  # Endpoint for logout
+    path('next-visitor-pass/', NextVisitorPassView.as_view(), name='next_visitor_pass'),
+    path('canteenfoodconsummationtiming/',CanteenFoodConsummationTimingListCreateAPIView.as_view(),name='canteenfoodconsummationtiming-list-create'),
+    path('canteenfoodconsummationtiming/<int:pk>/',CanteenFoodConsummationTimingDetail.as_view(),name='canteenfoodconsummationtiming-detail'),
+    path('canteenfoodordertiming/',CanteenFoodOrderTimingListCreateAPIView.as_view(),name='canteenfoodordertiming-list-create'),
+    path('canteenfoodordertiming/<int:pk>/',CanteenFoodOrderTimingDetail.as_view(),name='canteenfoodordertiming-detail'),
+    path('caterer/',CatererListCreateAPIView.as_view(),name='caterer-list-create'),
+    path('caterer/<int:pk>/',CatererRetrieveUpdateDestroyView.as_view(),name='caterer-detail'),
+    path('canteenfoodrate/', CanteenFoodRateListCreateView.as_view(), name='canteenfoodrate-list-create'),
+    path('canteenfoodrate/<int:pk>/', CanteenFoodRateRetrieveUpdateDestroyView.as_view(), name='canteenfoodrate-detail'),
+    path('canteenfoodmenu/', CanteenFoodMenuListCreateView.as_view(), name='canteen-food-menu-list-create'),
+    path('canteenfoodmenu/<int:pk>/', CanteenFoodMenuRetrieveUpdateDestroyView.as_view(), name='canteen-food-menu-retrieve-update-destroy'),
+    path('caterer-menus/', CatererMenuListCreateView.as_view(), name='caterer-menu-list-create'),
+    path('caterer-menus/<int:pk>/', CatererMenuDetailView.as_view(), name='caterer-menu-detail'),
+    path('canteen_food_menus_by_ids/', get_canteen_food_menus_by_ids, name='canteen_food_menus_by_ids'),
+    path('circular/',CircularListCreateView.as_view(),name='circular-list'),
+    path('circular/<int:pk>/',CircularDetailView.as_view(),name='circular-details'),
+     path('circular-menus/', CircularMenuListCreateView.as_view(), name='circular-menu-list-create'),
+    path('circular-menus/<int:pk>/', CircularMenuDetailView.as_view(), name='circular-menu-detail'),
+] 

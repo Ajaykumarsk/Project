@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    image: your_django_image
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres_db
+    environment:
+      - DATABASE_NAME=visitor
+      - DATABASE_USER=myuser
+      - DATABASE_PASSWORD=mypassword
+      - DATABASE_HOST=postgres_db
+      - DATABASE_PORT=5434
+
+  postgres_db:
+    image: postgres:16
+    environment:
+      - POSTGRES_DB=visitor
+      - POSTGRES_USER=myuser
+      - POSTGRES_PASSWORD=mypassword
+    ports:
+      - "5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

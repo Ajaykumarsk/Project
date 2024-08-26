@@ -1,0 +1,30 @@
+<div class="container mt-4" [formGroup]="updateCircularForm">
+    <!-- Form for Updating Circular -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Update Circular</h3>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="updateCircular()" [formGroup]="updateCircularForm">
+          <div class="p-field">
+            <label for="title">Title</label>
+            <input id="title" pInputText formControlName="title" placeholder="Title" />
+          </div>
+          <div class="p-field">
+            <label for="media">Media</label>
+            <input type="file" (change)="onFileSelected($event)" />
+          </div>
+          <div *ngIf="currentCircular?.media" class="p-field">
+            <label>Current Media</label>
+            <img *ngIf="mediaType === 'image'" [src]="currentCircular?.media" alt="Circular Media" class="img-fluid" style="max-width: 200px; max-height: 200px;">
+            <video *ngIf="mediaType === 'video'" [src]="currentCircular?.media" controls style="max-width: 400px;"></video>
+          </div>
+          <div class="flex justify-content-center gap-2">
+            <p-button label="Update" type="submit" class="p-button-primary" [disabled]="!updateCircularForm.valid"></p-button>
+            <p-button label="Cancel" class="p-button-secondary" routerLink="/circular"></p-button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

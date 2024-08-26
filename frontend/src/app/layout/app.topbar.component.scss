@@ -1,0 +1,208 @@
+.layout-topbar {
+    overflow: visible;
+  }
+  
+  .layout-topbar-button {
+    position: relative;
+  }
+  .ui-dialog {
+    font-size: 14px;
+  }
+  
+  
+  .badge-container {
+    position: relative; /* Container should be relative for badge to be positioned absolutely */
+  }
+  
+  .badge {
+    position: absolute; /* Absolute positioning within the container */
+    top: 10px; /* Adjust as needed */
+    right: 150px; /* Adjust as needed */
+    background-color: #f0ad4e;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 10px;
+    font-size: 12px;
+    display: inline-block;
+  }
+  
+  
+  .verification-message {
+    position: absolute;
+    top: 50px; /* Adjust to be below the button */
+    right: 0;
+    background-color: #f0ad4e;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    text-align: center;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%; /* Adjust if needed to appear right below the button */
+    right: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    width: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .dropdown-header {
+    background: #07df3d;
+    padding: 5px;
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+  }
+  .dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .dropdown-menu li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .dropdown-menu li:last-child {
+    border-bottom: none;
+  }
+  
+  .dropdown-menu div {
+    margin-bottom: 5px;
+  }
+  
+  .mark-read-button {
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+.user-profile-container {
+    position: relative; // Ensure dropdown is positioned relative to this container
+    cursor: pointer; // Pointer cursor to indicate clickable area
+  }
+  
+  .user-profile-dropdown {
+    position: absolute;
+    bottom: -150px; // Position the dropdown below the profile button
+    right: 0; // Align the dropdown with the profile button
+    background-color: #fff; // Background color for the dropdown
+    border: 1px solid #ddd; // Border for visual separation
+    padding: 10px; // Padding inside the dropdown
+    border-radius: 5px; // Rounded corners
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); // Shadow for better visibility
+    width: 200px; // Fixed width for the dropdown
+    z-index: 1000; // Ensure it's on top of other elements
+    display: flex;
+    flex-direction: column;
+    gap: 10px; // Space between elements
+  }
+  
+  .user-profile-dropdown h2 {
+    margin: 0 0 10px 0; // Margin bottom for spacing between title and details
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .profile-details {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .profile-details p {
+    margin: 0;
+  }
+
+ // Variables for easy customization
+$frame-size: 130px;
+$frame-border-radius: 10px; // Adjust as needed
+$border-color: #ccc;
+$border-width: 1px;
+$outer-border-color: #007BFF; // Color for the outer border
+$outer-border-width: 1px;
+
+.card {
+  padding: 1em;
+  margin-bottom: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.visitor-info {
+  flex: 1;
+}
+
+.field {
+  .webcam-section-wrapper {
+    border: $outer-border-width solid $outer-border-color;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .webcam-section {
+    display: flex;
+    justify-content: space-evenly;
+
+    .webcam-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      label {
+        margin-bottom: 10px;
+        font-weight: bold;
+        text-align: center;
+      }
+
+      .webcam-frame {
+        position: relative;
+        width: $frame-size;
+        height: $frame-size;
+        border-radius: 100%;
+        overflow: hidden;
+        border: $border-width solid $border-color;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+
+        .captured-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+

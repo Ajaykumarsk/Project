@@ -1,0 +1,48 @@
+// glide-slider.component.scss
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevents scrolling */
+  }
+  
+  .glide {
+    height: 100vh; /* Full viewport height */
+    width: 100vw;  /* Full viewport width */
+  }
+  
+  .glide__track {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .glide__slide {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .glide__slide img {
+    width: 10%;
+    height: 10%;
+    object-fit: cover; /* Ensures the image covers the entire slide area */
+  }
+  
+  .glide__arrows {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+  }
+  
+  .glide__arrow {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+  }
+  

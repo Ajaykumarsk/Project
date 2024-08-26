@@ -1,0 +1,160 @@
+<div class="form-container">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="grid flex">
+      
+      <div class="col-12 md:col-8 lg:col-9 xl:col-10">
+        <h3>Update User</h3>
+        <div class="grid p-fluid mt-1">
+          
+          <!-- Employee ID -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <input id="employee_id" pInputText formControlName="employee_id" />
+              <label for="employee_id">Employee ID</label>
+            </span>
+          </div>
+
+          <!-- Device Enrol Number -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <input id="device_enrol_number" pInputText formControlName="device_enrol_number" />
+              <label for="device_enrol_number">Device Enrol Number</label>
+            </span>
+          </div>
+
+          <!-- Card Number -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <input id="card_number" pInputText formControlName="card_number" />
+              <label for="card_number">Card Number</label>
+            </span>
+          </div>
+
+          <!-- Name -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <input id="name" pInputText formControlName="name" />
+              <label for="name">Name</label>
+            </span>
+          </div>
+
+          <!-- Email ID -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <input id="email_id" pInputText type="email" formControlName="email_id" />
+              <label for="email_id">Email ID</label>
+            </span>
+          </div>
+
+          <!-- Gender -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <p-dropdown
+              id="gender"
+              [options]="genders"
+              formControlName="gender"
+              optionLabel="label"
+              placeholder="Select Gender"
+            ></p-dropdown>
+              <label for="gender">Gender</label>
+            </span>
+          </div>
+
+          <!-- Department -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <p-dropdown
+                id="department"
+                formControlName="department"
+                [options]="departments"
+                optionLabel="name"
+                placeholder="Select Department"
+              ></p-dropdown>
+              <label for="department">Department</label>
+            </span>
+          </div>
+
+          <!-- Location -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <p-dropdown
+                id="location"
+                formControlName="location"
+                [options]="locations"
+                optionLabel="name"
+                placeholder="Select Location"
+              ></p-dropdown>
+              <label for="location">Location</label>
+            </span>
+          </div>
+
+          <!-- Company -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <p-dropdown
+                id="company"
+                formControlName="company"
+                [options]="companies"
+                optionLabel="name"
+                placeholder="Select Company"
+              ></p-dropdown>
+              <label for="company">Company</label>
+            </span>
+          </div>
+
+          <!-- Employee Type -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <p-dropdown
+                id="employee_type"
+                formControlName="employee_type"
+                [options]="employeeTypes"
+                optionLabel="name"
+                placeholder="Select Employee Type"
+              ></p-dropdown>
+              <label for="employee_type">Employee Type</label>
+            </span>
+          </div>
+
+          <!-- Contact Number -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <span class="p-float-label">
+              <input id="contact_number" pInputText formControlName="contact_number" type="text" />
+              <label for="contact_number">Contact Number</label>
+            </span>
+          </div>
+
+          <!-- Date of Joining -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <p-floatLabel>
+              <p-calendar
+                id="date_of_joining"
+                [showIcon]="true"
+                formControlName="date_of_joining"
+                dateFormat="yy-mm-dd"
+              ></p-calendar>
+              <label for="date_of_joining">Date of Joining</label>
+            </p-floatLabel>
+          </div>
+
+          <!-- Date of Leaving -->
+          <div class="field col-12 md:col-6 lg:col-6 xl:col-4">
+            <p-floatLabel>
+              <p-calendar
+                id="date_of_leaving"
+                [showIcon]="true"
+                formControlName="date_of_leaving"
+                dateFormat="yy-mm-dd"
+              ></p-calendar>
+              <label for="date_of_leaving">Date of Leaving</label>
+            </p-floatLabel>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="centered-button">
+      <button type="submit" pButton label="Update User"></button>
+    </div>
+  </form>
+</div>

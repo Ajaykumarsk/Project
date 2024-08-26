@@ -1,0 +1,69 @@
+<div class="container mt-4" [formGroup]="canteenFoodConsummationForm">
+
+    <!-- Modal Dialog for Adding Canteen Food Consummation Timing -->
+    <p-dialog header="Add Canteen Food Consummation Timing" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '50vw'}">
+        <form (ngSubmit)="addCanteenFoodConsummation()" [formGroup]="canteenFoodConsummationForm">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input id="name" pInputText formControlName="name" placeholder="Name" />
+            </div>
+            <div class="p-field">
+                <label for="begin_time">Begin Time</label>
+                <input id="begin_time" pInputText formControlName="begin_time" type="time" />
+            </div>
+            <div class="p-field">
+                <label for="end_time">End Time</label>
+                <input id="end_time" pInputText formControlName="end_time" type="time" />
+            </div>
+            <div class="flex justify-content-center gap-2">
+                <p-button label="Add" type="submit" class="p-button-primary" [disabled]="!canteenFoodConsummationForm.valid"></p-button>
+                <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <!-- Canteen Food Consummation Timing Table -->
+    <div class="p-grid">
+        <div class="col-12">
+            <div class="card">
+                <p-table [value]="canteenFoodConsummations" [paginator]="true" [rows]="10" [columns]="displayedColumns" styleClass="p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Name</th>
+                            <th>Begin Time</th>
+                            <th>End Time</th>
+                            <th>Actions</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-rowData>
+                        <tr>
+                            <td>{{ rowData.name }}</td>
+                            <td>{{ rowData.begin_time }}</td>
+                            <td>{{ rowData.end_time }}</td>
+                            <td>
+                                <div class="flex justify-content-center gap-2">
+                                    <button pButton icon="pi pi-pencil" [routerLink]="'/updatecanteenfoodconsummationtiming/' + rowData.id" class="p-button-success"></button>
+                                    <p-toast></p-toast>
+                                    <p-confirmPopup>
+                                        <ng-template pTemplate="content" let-message>
+                                            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                                <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                                                <p>{{ message.message }}</p>
+                                            </div>
+                                        </ng-template>
+                                    </p-confirmPopup>
+                                    <p-button (click)="confirm($event, rowData.id)" icon="pi pi-trash"></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

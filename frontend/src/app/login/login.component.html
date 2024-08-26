@@ -1,0 +1,40 @@
+<div class="surface-ground flex align-items-center justify-content-center overflow-hidden">
+    <div class="flex flex-column align-items-center justify-content-center">
+        <!-- Move style to component SCSS file or keep it here as needed -->
+        <style>
+            .logo {
+                width: 220px;
+                height: 70px;
+                object-fit: contain; /* or cover, depending on the desired effect */
+            }
+        </style>
+
+        <img src="assets/layout/images/Digital-i.png" alt="logo" class="logo">
+
+        <div style="border-radius: 56px; padding: 0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+            <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px;">
+                <div class="text-center mb-4">
+                    <img src="assets/demo/images/blocks/logos/hyper.svg" alt="Image" height="50" class="mb-3">
+                    <div class="text-900 text-3xl font-medium mb-3">Welcome, Sign In</div>
+                    <span class="text-600 font-medium">Sign in to continue</span>
+                </div>
+                <div>
+                    <label for="username" class="block text-900 font-medium mb-2">Username</label>
+                    <input id="username" type="text" placeholder="Username" pInputText class="w-full mb-3" [(ngModel)]="username">
+
+                    <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+                    <input id="password1" type="password" placeholder="Password" [(ngModel)]="password" pInputText class="w-full mb-3">
+                </div>
+                <!-- Ensure p-messages is correctly integrated -->
+                <p-messages [value]="messages" [closable]="false" class="custom-messages"></p-messages>
+
+
+                <div class="text-center">
+                    <button pButton pRipple label="Sign In" icon="pi pi-user" class="w-50 mx-auto" (click)="login()"></button>
+                </div>
+
+                <p class="text-center mt-3">Don't have an account? <a routerLink="/register" class="text-danger">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+</div>

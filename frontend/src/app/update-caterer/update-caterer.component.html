@@ -1,0 +1,32 @@
+<div class="card">
+    <div class="update-caterer-form">
+      <h2>Update Caterer</h2>
+      <!-- Form to Update Caterer Details -->
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="p-grid">
+          <div class="p-col-12">
+            <label for="caterer_name">Caterer Name</label>
+            <input type="text" id="caterer_name" formControlName="caterer_name" pInputText />
+          </div>
+          <div class="p-col-12">
+            <label for="canteen_item_name">Canteen Item Name</label>
+            <input type="text" id="canteen_item_name" formControlName="canteen_item_name" pInputText />
+          </div>
+          <div class="p-col-12">
+            <label for="valid_from">Valid From</label>
+            <input type="date" id="valid_from" formControlName="valid_from" pInputText />
+          </div>
+          <div class="p-col-12">
+            <label for="valid_to">Valid To</label>
+            <input type="date" id="valid_to" formControlName="valid_to" pInputText />
+          </div>
+        </div>
+  
+        <div class="buttons">
+          <button type="submit" pButton label="Update" [disabled]="!form.valid" class="update-button"></button>
+          <button type="button" pButton label="Cancel" routerLink="/caterer" class="cancel-button"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+  

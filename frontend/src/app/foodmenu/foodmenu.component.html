@@ -1,0 +1,93 @@
+<div class="fit">
+  <div class="card">
+    <div class="header">
+      <img src="assets/layout/images/logo.png" alt="Logo" class="logo">
+      <div class="menu-details flex-content">
+        <h4>Welcome Himalaya Wellness Food Court</h4>
+      </div>
+    </div>
+
+    <div class="grid">
+      <!-- Food Menu Carousel -->
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="card mb-0">
+          <div class="menu-container">
+            <div class="food-menu">
+              <h3>Food Menu</h3>
+            </div>
+            <div class="meal-info">
+              <h4>
+                <p>{{ mealType }} {{ mealTime }}</p>
+                Total Calories: {{ totalCalories }} cal
+              </h4>
+            </div>
+          </div>
+
+          <div class="carousel-container">
+            <p-carousel 
+              [value]="filteredMenus" 
+              [numVisible]="2"  
+              [numScroll]="1" 
+              [circular]="true" 
+              [responsiveOptions]="responsiveOptions"
+              orientation="vertical"
+              verticalViewPortHeight="360px" 
+              autoplayInterval="3000"
+              #foodCarousel>
+              <ng-template let-menu pTemplate="item">
+                <div *ngFor="let detail of menu.food_menu_details" class="carousel-item">
+                  <img [src]="detail.item_photo" [alt]="detail.menu" class="item-photo" />
+                  <div class="item-info">
+                    <p>
+                      <strong>Name:</strong> {{ detail.menu }}<br>
+                      <strong>Quantity:</strong> {{ detail.quantity }}<br>
+                      <strong>Calories:</strong> {{ detail.calorie }}
+                    </p>
+                  </div>
+                </div>
+              </ng-template>
+            </p-carousel>
+          </div>
+        </div>
+      </div>
+
+      <!-- Circulars Carousel -->
+      <div class="col-12 md:col-6 lg:col-6">
+        <div class="card mb-1">
+          <h3>Blog/Circular/Wishes</h3>
+          <div class="carousel-container">
+            <p-carousel 
+            [value]="circulars" 
+            [numVisible]="1"  
+            [numScroll]="1" 
+            [circular]="true" 
+            [responsiveOptions]="responsiveOptions"
+            orientation="vertical"
+            verticalViewPortHeight="360px" 
+            autoplayInterval="3000"
+            #circularCarousel>
+            <ng-template let-circular pTemplate="item">
+              <div class="carousel-item media-container">
+                <ng-container *ngIf="circular.media">
+                  <!-- Display Image -->
+                  <img *ngIf="isImage(circular.media)" [src]="circular.media" alt="Circular Media" class="media-content" />
+                  <!-- Display Video -->
+                  <video *ngIf="isVideo(circular.media)" 
+                         [src]="circular.media" 
+                         autoplay 
+                         loop 
+                         muted 
+                         class="media-content"
+                         controls>
+                    Your browser does not support the video tag.
+                  </video>
+                </ng-container>
+              </div>
+            </ng-template>
+          </p-carousel>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="container mt-4" [formGroup]="canteenFoodRateForm">
+
+    <!-- Modal Dialog for Adding Canteen Food Rate -->
+    <p-dialog header="Canteen Food Rate" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '50vw'}">
+        <form (ngSubmit)="addCanteenFoodRate()" [formGroup]="canteenFoodRateForm">
+            <div class="p-field">
+                <label for="caterer">Caterer</label>
+                <p-dropdown 
+                    id="caterer" 
+                    [options]="caterers" 
+                    optionLabel="caterer_name" 
+                    formControlName="caterer">
+                </p-dropdown>
+            </div>
+            <div class="p-field">
+                <label for="canteen_item_name">Canteen Item Name</label>
+                <input id="canteen_item_name" pInputText formControlName="canteen_item_name" placeholder="Canteen Item Name" />
+            </div>
+            <div class="p-field">
+                <label for="valid_from">Valid From</label>
+                <input id="valid_from" pInputText formControlName="valid_from" type="date" />
+            </div>
+            <div class="p-field">
+                <label for="valid_to">Valid To</label>
+                <input id="valid_to" pInputText formControlName="valid_to" type="date" />
+            </div>
+            <div class="p-field">
+                <label for="employer_contribution">Employer Contribution</label>
+                <input id="employer_contribution" pInputText formControlName="employer_contribution" type="number" />
+            </div>
+            <div class="p-field">
+                <label for="employee_contribution">Employee Contribution</label>
+                <input id="employee_contribution" pInputText formControlName="employee_contribution" type="number" />
+            </div>
+            <div class="p-field">
+                <label for="caterer_price">Caterer Price</label>
+                <input id="caterer_price" pInputText formControlName="caterer_price" type="number" />
+            </div>
+            <div class="p-field">
+                <label for="employee_type">Employee Type</label>
+                <p-dropdown 
+                    id="employee_type" 
+                    [options]="employeeTypes" 
+                    optionLabel="name" 
+                    formControlName="employee_type">
+                </p-dropdown>
+            </div>
+            <div class="flex justify-content-center gap-2">
+                <p-button label="Save" type="submit" class="p-button-primary" [disabled]="!canteenFoodRateForm.valid"></p-button>
+                <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+            </div>
+        </form>
+    </p-dialog>
+
+    <!-- Canteen Food Rate Table -->
+    <div class="p-grid">
+        <div class="col-12">
+            <div class="card">
+                <p-table [value]="canteenFoodRates" [paginator]="true" [rows]="10" [columns]="displayedColumns" styleClass="p-datatable-gridlines">
+                    <ng-template pTemplate="caption">
+                        <div class="flex">
+                            <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+                        </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>ID</th>
+                            <th>Caterer Name</th>
+                            <th>Canteen Item Name</th>
+                            <th>Valid From</th>
+                            <th>Valid To</th>
+                            <th>Employer Contribution</th>
+                            <th>Employee Contribution</th>
+                            <th>Caterer Price</th>
+                            <th>Employee Type</th>
+                            <th>Actions</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-canteenFoodRate>
+                        <tr>
+                            <td>{{ canteenFoodRate.id }}</td>
+                            <td>{{ getCatererName(canteenFoodRate.caterer_name)}}</td>
+                            <td>{{ canteenFoodRate.canteen_item_name }}</td>
+                            <td>{{ canteenFoodRate.valid_from }}</td>
+                            <td>{{ canteenFoodRate.valid_to }}</td>
+                            <td>{{ canteenFoodRate.employer_contribution }}</td>
+                            <td>{{ canteenFoodRate.employee_contribution }}</td>
+                            <td>{{ canteenFoodRate.caterer_price }}</td>
+                            <td>{{ getEmployeeTypeName(canteenFoodRate.employee_type) }}</td>
+                            <td>
+                                <div class="flex justify-content-center gap-2">
+                                    <button pButton icon="pi pi-pencil" [routerLink]="'/updatecanteenfoodrate/' + canteenFoodRate.id" class="p-button-success"></button>
+                                    <p-toast></p-toast>
+                                    <p-confirmPopup>
+                                        <ng-template pTemplate="content" let-message>
+                                            <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                                <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                                                <p>{{ message.message }}</p>
+                                            </div>
+                                        </ng-template>
+                                    </p-confirmPopup>
+                                    <p-button (click)="confirm($event, canteenFoodRate.id)" icon="pi pi-trash"></p-button>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</div>

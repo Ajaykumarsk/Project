@@ -1,0 +1,134 @@
+/* General container styling */
+.container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  
+    .card {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+  
+      .card-header {
+        background-color: #007ad9;
+        color: #fff;
+        padding: 15px;
+        border-radius: 5px 5px 0 0;
+        text-align: center;
+  
+        h3 {
+          margin: 0;
+          font-size: 1.5rem;
+        }
+      }
+  
+      .card-body {
+        padding: 20px;
+  
+        .p-field {
+          margin-bottom: 15px;
+  
+          label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+          }
+  
+          input[type='file'] {
+            margin-top: 5px;
+          }
+  
+          img {
+            display: block;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+          }
+        }
+  
+        .flex {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+  
+          .p-button {
+            margin-top: 20px;
+          }
+  
+          .p-button-secondary {
+            background-color: #d9534f;
+            border-color: #d9534f;
+  
+            &:hover {
+              background-color: #c9302c;
+              border-color: #ac2925;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .container {
+      .card {
+        .card-body {
+          padding: 10px;
+  
+          .p-field {
+            label {
+              font-size: 0.9rem;
+            }
+  
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          }
+  
+          .flex {
+            flex-direction: column;
+            gap: 5px;
+  
+            .p-button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .container {
+      .card {
+        .card-body {
+          padding: 5px;
+  
+          .p-field {
+            label {
+              font-size: 0.8rem;
+            }
+  
+            img {
+              max-width: 100%;
+              height: auto;
+            }
+          }
+  
+          .flex {
+            flex-direction: column;
+            gap: 5px;
+  
+            .p-button {
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+  

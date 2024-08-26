@@ -1,0 +1,19 @@
+<div class="card">
+    <div class="update-company-form">
+    <h2>Update Company</h2>
+    <!--Form to Update User Details-->
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="p-grid">
+        <div class="p-col-12">
+          <label for="name">Name</label>
+          <input type="text" id="name" formControlName="name" pInputText />
+        </div>
+      </div>
+      
+      <div class="buttons">
+        <button type="submit" pButton label="Update" [disabled]="!form.valid" class="update-button"></button>
+        <button type="button" pButton label="Cancel" routerLink="/companys" class="cancel-button"></button>
+        </div>
+    </form>
+  </div>
+  </div>

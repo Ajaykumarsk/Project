@@ -1,0 +1,48 @@
+<div class="surface-ground flex align-items-center justify-content-center overflow-hidden">
+  <div class="flex flex-column align-items-center justify-content-center">
+    <style>
+        .logo {
+            width: 220px;
+            height: 70px;
+            object-fit: contain; /* or cover, depending on the desired effect */
+        }
+    </style>
+    
+    <img src="assets/layout/images/Digital-i.png" alt="logo" class="logo">
+      <div style="border-radius:56px; padding:0.3rem; background: linear-gradient(180deg, var(--primary-color) 10%, rgba(33, 150, 243, 0) 30%);">
+          <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius:53px">
+              <div class="text-center mb-4">
+                  <img src="assets/demo/images/blocks/logos/hyper.svg" alt="Image" height="50" class="mb-3">
+                  <div class="text-900 text-3xl font-medium mb-3">Welcome, Sign Up</div>
+                  <span class="text-600 font-medium">Sign up to continue</span>
+              </div>
+              <form [formGroup]="registrationForm" (ngSubmit)="register()">
+                  <div>
+                      <label for="username" class="block text-900 font-medium mb-2">Username</label>
+                      <input id="username" formControlName="username" type="text" placeholder="Username" pInputText class="w-full mb-3">
+      
+                      <label for="email" class="block text-900 font-medium mb-2">Email</label>
+                      <input id="email" formControlName="email" type="email" placeholder="Email" pInputText class="w-full mb-3">
+              
+                      <label for="password1" class="block text-900 font-medium mb-2">Password</label>
+                      <input id="password1" formControlName="password" type="password" placeholder="Password" pInputText class="w-full mb-3">
+      
+                      <label for="password2" class="block text-900 font-medium mb-2">Confirm Password</label>
+                      <input id="password2" type="password" placeholder="Confirm Password" pInputText class="w-full mb-3">
+                        
+                  <p-messages 
+                  [(value)]="messages" 
+                  [enableService]="false" 
+                  [closable]="false" />
+                  <div class="text-center"> 
+                      <button pButton pRipple label="Sign Up" icon="pi pi-user" class="w-80 mx-auto" type="submit" ></button>
+                  </div>
+                    </div>
+                     </form>
+              
+              <!-- Registration link -->
+              <p class="text-center mt-3">Already have an account? <a routerLink="/login" class="text-danger">Sign In</a></p>
+          </div>
+      </div>
+  </div>
+</div>

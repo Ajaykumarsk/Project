@@ -1,0 +1,60 @@
+<div class="container mt-4" [formGroup]="employeeTypeForm">
+
+  <!-- Modal Dialog for Adding Employee Type -->
+  <p-dialog header="Add Employee Type" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '400px'}" >
+      <form (ngSubmit)="addEmployeeType()" [formGroup]="employeeTypeForm">
+          <div class="p-field">
+              <label for="employeeTypeName">Employee Type</label>
+              <input id="employeeTypeName" type="text" pInputText formControlName="employeeTypeName" placeholder="Name">
+          </div>
+            
+          <div class="flex justify-content-center gap-2">
+              <p-button label="Add" type="submit" class="p-button-primary"></p-button>
+              <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+          </div>
+      </form>
+  </p-dialog>
+
+  <!-- Employee Type Table -->
+  <div class="p-grid">
+      <div class="col-12">
+          <div class="card">
+              <p-table [value]="employeeTypes" styleClass="p-datatable-gridlines"> <!-- Updated variable name -->
+                  <ng-template pTemplate="caption">
+                      <div class="flex">
+                          <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+                      </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                      <tr>
+                          <th>Employee Type ID</th> <!-- Updated column header -->
+                          <th>Employee Type Name</th> <!-- Updated column header -->
+                          <th>Action</th>
+                      </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-employeeType> <!-- Updated variable name -->
+                      <tr>
+                          <td>{{ employeeType.id }}</td> <!-- Updated variable name -->
+                          <td>{{ employeeType.name }}</td> <!-- Updated variable name -->
+                          <td>
+                              <div class="flex justify-content-center gap-2">
+                                  <button pButton icon="pi pi-pencil" [routerLink]="'/updatecemployeetypes/' + employeeType.id" class="p-button-success"></button> <!-- Updated route -->
+                                  <p-toast />
+                                  <p-confirmPopup>
+                                      <ng-template pTemplate="content" let-message>
+                                          <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                                              <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                                              <p>{{ message.message }}</p>
+                                          </div>
+                                      </ng-template>
+                                  </p-confirmPopup>
+                                  <p-button (click)="confirm($event, employeeType.id)" icon="pi pi-trash"></p-button> <!-- Updated method call and variable name -->
+                              </div>
+                          </td>
+                      </tr>
+                  </ng-template>
+              </p-table>
+          </div>
+      </div>
+  </div>
+</div>

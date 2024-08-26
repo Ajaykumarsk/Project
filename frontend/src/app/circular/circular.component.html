@@ -1,0 +1,71 @@
+<div class="container mt-4" [formGroup]="circularForm">
+    <!-- Modal Dialog for Adding Circular -->
+    <p-dialog header="Add Circular" [(visible)]="displayDialog" [modal]="true" [responsive]="true" [style]="{width: '50vw'}">
+      <form (ngSubmit)="addCircular()" [formGroup]="circularForm">
+        <div class="p-field">
+          <label for="title">Title</label>
+          <input id="title" pInputText formControlName="title" placeholder="Title" />
+        </div>
+        <div class="p-field">
+          <label for="media">Media (Image/Video)</label>
+          <input type="file" (change)="onFileSelected($event)" />
+        </div>
+        <div class="flex justify-content-center gap-2">
+          <p-button label="Add" type="submit" class="p-button-primary" [disabled]="!circularForm.valid"></p-button>
+          <p-button label="Cancel" class="p-button-secondary" (click)="hideDialog()"></p-button>
+        </div>
+      </form>
+    </p-dialog>
+  
+    <!-- Circulars Table -->
+    <div class="p-grid">
+      <div class="col-12">
+        <div class="card">
+          <p-table [value]="circulars" [paginator]="true" [rows]="10" styleClass="p-datatable-gridlines">
+            <ng-template pTemplate="caption">
+              <div class="flex">
+                <p-button label="Add" class="p-button-primary" (click)="showDialog()"></p-button>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Title</th>
+                <th>Media</th>
+                <th>Actions</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData>
+              <tr>
+                <td>{{ rowData.title }}</td>
+                <td>
+                  <ng-container *ngIf="rowData.media">
+                    <img *ngIf="isImage(rowData.media)" [src]="rowData.media" alt="Circular Media" width="50">
+                    <video *ngIf="isVideo(rowData.media)" width="50" controls>
+                      <source [src]="rowData.media" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </ng-container>
+                </td>
+                <td>
+                  <div class="flex justify-content-center gap-2">
+                    <button pButton icon="pi pi-pencil" [routerLink]="'/updatecircular/' + rowData.id " class="p-button-success"></button>
+                    <p-toast></p-toast>
+                    <p-confirmPopup>
+                      <ng-template pTemplate="content" let-message>
+                        <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3">
+                          <i [class]="message.icon" class="text-6xl text-primary-500"></i>
+                          <p>{{ message.message }}</p>
+                        </div>
+                      </ng-template>
+                    </p-confirmPopup>
+                    <p-button (click)="confirm($event, rowData.id)" icon="pi pi-trash"></p-button>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,46 @@
+<div class="card p-field">
+  <label for="searchInput"></label>
+  <input id="searchInput" type="text" pInputText placeholder="Search by visitor name" [(ngModel)]="searchTerm" (input)="searchVisitors()" class="mr-2"/>
+  <p-button type="button" (click)="clearSearch()">Clear</p-button>
+</div>
+
+  
+<div class="grid p-fluid">
+    
+    <div class="col-12 lg:col-6" *ngFor="let visitor of filteredVisitors">
+        <div class="card">
+          <h5>Visitor Pass  {{visitor.visitor_pass_no}}</h5>
+          <div class="content-wrapper">
+            <div class="visitor-info">
+              <p>Name: {{ visitor.visitor_name }}</p>
+              <p>Type: {{ visitor.type_of_visitor }}</p>
+              <p>Company Name: {{ visitor.company_name }}</p>
+              <p>Whom to meet: {{ visitor.select_employee }}</p>
+              <p>Visiting purpose: {{ visitor.meeting_purpose }}</p>
+              <p>Date: {{ visitor.valid_pass_from | date }}</p>
+              <p>Verified: {{ visitor.is_verified ? 'Yes' : 'No' }}</p>
+              <p>Approved: {{ visitor.is_approved ? 'Yes' : 'No' }}</p>
+              <p-button label="Verify" (click)="onVerifyToggle(visitor)" [disabled]="visitor.is_verified"></p-button>
+          </div>
+  
+          <div class="field">
+            <div class="webcam-section">
+              <div class="webcam-section-wrapper">
+                <!-- Visitor Photo Webcam Container -->
+                <div class="webcam-container">
+                  <label for="visitorPhoto">Visitor Photo</label>
+                  <div class="webcam-frame">
+                    <!-- Display captured visitor photo -->
+                    <img *ngIf="visitor.visitor_photo" [src]="visitor.visitor_photo" alt="Visitor Photo" class="captured-image"/>
+                    <p *ngIf="!visitor.visitor_photo">No visitor photo available</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+  
